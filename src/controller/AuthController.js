@@ -1,5 +1,6 @@
 const AuthModel = require("../model/AuthModel");
 const { convertPassword, comparePassword, tokenTime } = require("../utils/utils");
+const sendMail = require('./Email');
 require("dotenv").config()
 const jwt = require('jsonwebtoken')
 exports.authSignup = async function (request, response) {
@@ -12,7 +13,8 @@ exports.authSignup = async function (request, response) {
             password: await convertPassword(data.password)
         }
 
-        const res = await AuthModel.create(signupData)
+        const res = await AuthModel.create(signupData);
+        sendMail(data.email,`welcome to crud project signup verifiction mail and request verfiy user`,`hello ${data.name} signup successfully`)
         if (res) {
             response.json({
                 status: "Success",

@@ -7,6 +7,7 @@ const AuthSchema = new mongoose.Schema({
     email:{type:String,required:[true,"Email is Required"],unique:true},
     password:String,
     profile_image:String,
+    status:{type:Number,default:0}
 },{
     timestamps:true
 })

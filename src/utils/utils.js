@@ -14,3 +14,5 @@ exports.tokenTime = function(){
         expiresIn:"30d"
     }
 }
+
+

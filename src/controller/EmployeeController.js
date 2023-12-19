@@ -14,6 +14,7 @@ exports.getAllEmployee = async (request,response,next)=>{
         obj.email = e.email;
         return obj;
       })
+     
       
 
       if(res){
@@ -56,7 +57,7 @@ exports.AddEmployeeData=async (request,response)=>{
 exports.EmployeeGet=async (request,response)=>{
   try{
         const id=request.params
-        const ww=request.body
+        // const ww=request.body
         const rr=await EmployeeModel.find({_id:id})
         response.json({
           status:"success",
