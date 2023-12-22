@@ -77,6 +77,7 @@ app.use(express.json());
 
 app.use("/images",express.static(__dirname+"/public/image"))
 app.use("/uploadImages",express.static(__dirname+"/public/upload"))
+
 app.use("/auth",AuthRouter)
 app.use('/eapi',employeeRouter)
 

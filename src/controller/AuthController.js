@@ -1,6 +1,6 @@
 const AuthModel = require("../model/AuthModel");
 const { convertPassword, comparePassword, tokenTime } = require("../utils/utils");
-const sendMail = require('./Email');
+const sendMail = require('../utils/EmailVerify');
 require("dotenv").config()
 const jwt = require('jsonwebtoken')
 exports.authSignup = async function (request, response) {
@@ -14,7 +14,7 @@ exports.authSignup = async function (request, response) {
         }
 
         const res = await AuthModel.create(signupData);
-        sendMail(data.email,`welcome to crud project signup verifiction mail and request verfiy user`,`hello ${data.name} signup successfully`)
+        sendMail(res.email, `welcome to crud project signup verifiction mail and request verfiy user`, `hello ${res.name} signup successfully <a href="http://localhost:3000/verify?id=${res._id}">Verfiy</a>`)
         if (res) {
             response.json({
                 status: "Success",
@@ -131,3 +131,27 @@ exports.authUpdate = async function (request, response, next) {
     }
 }
 
+
+
+exports.updateStatus =async (request, response, next) => {
+    try {
+        const id=request.query.id;
+        const query = {_id:id}
+        const res = await AuthModel.updateOne(query,{status:1})
+        if(res){
+                response.json({
+                    status:"success",
+                    message:"Account Verifired"
+                })
+        }
+
+       
+
+    } catch (error) {
+        response.json({
+            status: "failed",
+            message: "status failed",
+            error: error
+        })
+    }
+}

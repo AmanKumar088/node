@@ -104,6 +104,12 @@ exports.EmployeeDelete=async (request,response)=>{
     })
   }catch(error){
     console.log(error)
+    response.json({
+      status:"falied",
+      message:"invalid detalis",
+      err:error
+    })
+   
   }
 }
 

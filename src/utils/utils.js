@@ -16,3 +16,10 @@ exports.tokenTime = function(){
 }
 
 
+exports.verifyTime=function(){
+    return{
+        expiresIn:"50000"
+    }
+}
+
+
